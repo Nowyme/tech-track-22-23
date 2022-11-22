@@ -1,4 +1,173 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
 body {
   background: white;
   font-family: sans-serif;
+}
+
+/* main {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  padding-block: 2rem;
+  width: min(95%, 70rem);
+  margin-inline: auto;
+}
+
+main section {
+  background-color: brown;
+}
+
+main section:first-of-type {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+main section:nth-of-type(2) {
+  grid-column-start: 2;
+}
+
+main section:last-of-type {
+  grid-column-start: 2;
+} */
+
+.container {
+  display: grid;
+  grid-template-columns: 0fr 1fr 1fr;
+  grid-template-rows: 1fr 0.9fr;
+
+  gap: 1em;
+  grid-auto-flow: row;
+  grid-template-areas:
+    '. test test2'
+    '. test test3';
+  height: 90vh;
+
+  padding-block: 2rem;
+  padding: 2em;
+  margin-left: -1em;
+}
+.container div {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 1.5em;
+  background-color: white;
+  overflow-y: scroll;
+}
+
+.container div::-webkit-scrollbar {
+  display: none;
+}
+.colum1 {
+  grid-area: test;
+
+  /* background-color: rebeccapurple; */
+}
+
+.colum2 {
+  grid-area: test2;
+  position: relative;
+  /* background-color: blue; */
+}
+
+.colum3 {
+  grid-area: test3;
+
+  /* background-color: red; */
+}
+
+svg {
+  padding-top: 3.5em;
+  padding-left: 6em;
+  border: none;
+
+  position: absolute;
+  bottom: 0;
+}
+
+text {
+  font-family: sans-serif;
+  dominant-baseline: middle;
+  font-weight: 600;
+}
+
+#bars text {
+  fill: black;
+  text-anchor: end;
+}
+
+#bars {
+  fill: #746beb;
+}
+
+#bars g rect {
+  margin-top: 2em;
+}
+
+.imgDriver {
+  margin-top: 1em;
+  position: relative;
+  top: 0.5em;
+}
+.imgLi {
+  margin-left: 1.5em;
+  list-style-type: none;
+}
+.imgDriver li:nth-of-type(2) {
+  margin-top: 0.7em;
+}
+.imgDriver li:nth-of-type(3) {
+  margin-top: 0.7em;
+}
+
+.imgDriver li:nth-of-type(4) {
+  margin-top: 0.7em;
+}
+
+.imgDriver li:nth-of-type(5) {
+  margin-top: 0.7em;
+}
+.imgDriver li img {
+  width: 3em;
+
+  border-radius: 0.5em;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.colum2 > div {
+  box-shadow: none;
+  border-radius: 0;
+  position: relative;
+  top: 1em;
+  left: 1.5em;
+}
+
+.colum2 > div button {
+  background-color: #4caf50;
+
+  border: none;
+
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.colum2 > div button:last-of-type {
+  background-color: gray;
+}
+
+.round {
+  border-radius: 20px;
 }

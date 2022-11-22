@@ -1,16 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tech-track Boilerplate App</title>
-  </head>
-  <body>
-    <h1>Tech Track boilerplate</h1>
 
-    <img src="./images/tt.png" alt="Tech Track logo" />
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+  <title>Tech-track Boilerplate App</title>
+</head>
 
-    <script type="module" src="./scripts/main.js"></script>
-  </body>
+<body>
+  <heder>
+
+  </heder>
+
+  <main>
+    <div class="container">
+      <div class="colum1">
+        <ul></ul>
+      </div>
+
+      <div class="colum2">
+        <div>
+          <button value="winst">Winst</button>
+          <button value="pole">Pole</button>
+        </div>
+        <ul class="imgDriver"></ul>
+        <svg width="700" height="379">
+          <g id="bars" transform="translate(90, 0)">
+          </g>
+          <g id="labels"></g>
+        </svg>
+      </div>
+      <div class="colum3"></div>
+    </div>
+  </main>
+
+
+
+
+
+
+  <script type="module" src="./scripts/main.js"></script>
+  <!-- Make sure you put this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+</body>
+
 </html>
