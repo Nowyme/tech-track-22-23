@@ -39,7 +39,7 @@ console.log('Hello, world!');
 //   })
 //   .catch((err) => console.error(err));
 
-fetch('../data/f1rankings')
+fetch('../public/data/f1rankings')
   .then((response) => response.json())
   .then((data) => {
     const rakingArray = data.response;
@@ -279,7 +279,7 @@ L.tileLayer(
 ).addTo(map);
 
 var myIcon = L.icon({
-  iconUrl: 'images/flag2.png',
+  iconUrl: 'public/images/flag2.png',
   iconSize: [40, 40],
   iconAnchor: [5, 40],
   popupAnchor: [15, -33],
