@@ -12,6 +12,7 @@ This project is about building a datavislaution from D3 and other frameworks.
 More information about the tech-track course can be found [ here ](https://github.com/cmda-tt/course-22-23)
 
 
+![screenshot](https://github.com/Nowyme/tech-track-22-23/blob/main/images/wiki%20img/screenshot.png)
 
 
 ## Getting started 
