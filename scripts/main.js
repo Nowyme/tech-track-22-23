@@ -5,40 +5,9 @@ import '../styles/style.css';
 import * as d3 from 'd3';
 import gsap from 'gsap';
 import { svg } from 'd3';
-import * as m from './map.js';
+import * as co from './map.js';
 
-console.log('Hello, world!');
-
-// getRanking();
-
-// const options = {
-//   method: 'GET',
-//   headers: {
-//     'X-RapidAPI-Key': '4a7a27e753mshe8c1eed5f04fb1dp1b9763jsna989b692cae0',
-//     'X-RapidAPI-Host': 'api-formula-1.p.rapidapi.com',
-//   },
-// };
-
-// fetch(
-//   'https://api-formula-1.p.rapidapi.com/rankings/drivers?season=2022',
-//   options
-// )
-//   .then((response) => response.json())
-//   .then((data) => {
-//     const name = data.response;
-//     // console.log(name);
-//     name.forEach((element) => {
-//       const driverName = element.driver.name;
-//       const driverImg = element.driver.image;
-//       // console.log(driverImg);
-//       // console.log(driverName);
-//       const markup = `<li>${driverName}</li>`;
-//       const markupImg = `<img src='${driverImg}' alt='${driverName}'>`;
-//       document.querySelector('ul').insertAdjacentHTML('beforeend', markupImg);
-//     });
-//   })
-//   .catch((err) => console.error(err));
-
+//FETCH F1 RANKING
 fetch('../data/f1rankings.json')
   .then((response) => response.json())
   .then((data) => {
@@ -83,196 +52,90 @@ fetch('../data/f1rankings.json')
 
   .catch((err) => console.error(err));
 
-const dataSet = [
-  { driver: 'VER', winst: 15 },
-  { driver: 'LEC', winst: 3 },
-  { driver: 'PER', winst: 2 },
-  { driver: 'SAI', winst: 1 },
-  { driver: 'RUS', winst: 1 },
-];
-const dataSet2 = [
-  { driver: 'VER', winst: 15 },
-  { driver: 'LEC', winst: 3 },
-  { driver: 'PER', winst: 2 },
-  { driver: 'SAI', winst: 1 },
-  { driver: 'RUS', winst: 1 },
-];
+//BARCHART
+function updateChart(idNumber) {
+  idNumber = Number(idNumber);
+  const dataSet = filterData(idNumber);
+  drawChart(dataSet);
+}
 
-const chartWidth = 400;
-const chartHeight = 300;
+function filterData(idNumber) {
+  const dataSet = [
+    { id: 1, driver: 'VER', winst: 15 },
+    { id: 1, driver: 'LEC', winst: 3 },
+    { id: 1, driver: 'PER', winst: 2 },
+    { id: 1, driver: 'RUS', winst: 1 },
+    { id: 1, driver: 'SAI', winst: 1 },
+    { id: 2, driver: 'VER', winst: 5 },
+    { id: 2, driver: 'LEC', winst: 3 },
+    { id: 2, driver: 'PER', winst: 3 },
+    { id: 2, driver: 'RUS', winst: 4 },
+    { id: 2, driver: 'SAI', winst: 2 },
+  ];
 
-const xScale = d3
-  .scaleLinear()
-  .domain([0, d3.max(dataSet, (d) => d.winst)])
-  .range([0, chartWidth]);
+  return dataSet.filter((d) => d.id === idNumber);
+}
 
-const yScale = d3
-  .scaleBand()
-  .domain(d3.map(dataSet, (d) => d.driver))
-  .range([0, chartHeight])
-  .paddingInner(0.35);
+function drawChart(dataSet) {
+  const chartWidth = 550;
+  const chartHeight = 300;
 
-//Om text labels toe te voegen hebben we twee
-//elementen nodig: <rect> en <text>. Om dit te
-//organiseren zetten we die samen in een <g>
-//De structuur die we willen is dus:
-// <g>
-//   <rect/>
-//   <text/>
-// </g>
+  const xScale = d3
+    .scaleLinear()
+    .domain([0, d3.max(dataSet, (d) => d.winst)])
+    .range([0, chartWidth]);
 
-//In plaats van dat we direct een join doen om
-//de balken te maken, doen we een join om lege
-//<g> groepen te maken. Die join actie bewaren
-//als 'bars'
-const bars = d3.select('#bars').selectAll('g').data(dataSet).join('g');
+  console.log(dataSet);
 
-//Nu gaan we die lege groepen vullen met bars
-//met de append() functie voegen we een element
-//toe aan de <g> tag die we eerder hebben gemaakt
-bars
-  .append('rect')
-  .attr('height', yScale.bandwidth())
-  .attr('width', (d) => xScale(d.winst))
-  .attr('y', (d) => yScale(d.driver))
-  .attr('rx', 5);
+  const yScale = d3
+    .scaleBand()
+    .domain(d3.map(dataSet, (d) => d.driver))
+    .range([0, chartHeight])
+    .paddingInner(0.05);
 
-//Nu doen we dat nog een keer maar dan voor <text>
-bars
-  .append('text')
-  .attr('y', (d) => yScale(d.driver) + yScale.bandwidth() / 2)
-  .attr('x', (d) => xScale(d.winst) + 20)
-  .text((d) => d.winst);
+  d3.select('#bars')
+    .selectAll('rect')
+    .data(dataSet)
+    .join('rect')
+    .transition()
+    .duration(500)
+    .attr('height', yScale.bandwidth() - 20)
+    .attr('width', (d) => xScale(d.winst))
+    .attr('y', (d) => yScale(d.driver))
+    .attr('rx', 5);
 
-d3.select('#labels')
-  .selectAll('text')
-  .data(dataSet)
-  .join('text')
-  .attr('y', (d) => yScale(d.driver) + yScale.bandwidth() / 2)
-  .text((d) => d.driver);
+  // const bars = d3.select('#bars').selectAll('g').data(dataSet).join('g');
 
-//leaft let
+  // bars
+  //   .append('text')
+  //   .attr('y', (d) => yScale(d.driver) + yScale.bandwidth() / 2)
+  //   .attr('x', (d) => xScale(d.winst) + 20)
+  //   .text((d) => d.winst);
 
-const coords = [
-  {
-    name: 'Bahrain International Circuit',
-    longlat: [33.763489, -118.193649],
-    winner: 'Charles Leclerc',
-  },
-  {
-    name: 'Jeddah Corniche Circuit',
-    longlat: [21.61264, 39.10806],
-    winner: 'Max Verstappen',
-  },
-  {
-    name: 'Albert Park Street Circuit',
-    longlat: [-37.84452, 144.94651],
-    winner: 'Charles Leclerc',
-  },
-  {
-    name: 'Autodromo Enzo e Dino Ferrari',
-    longlat: [44.34425020604998, 11.719518298678329],
-    winner: 'Max Verstappen',
-  },
+  d3.select('#labels')
+    .selectAll('text')
+    .data(dataSet)
+    .join('text')
+    .attr('y', (d) => yScale(d.driver))
+    .text((d) => d.driver);
+}
 
-  {
-    name: 'Miami International Autodrome',
-    longlat: [25.956777117916822, -80.23150098991948],
-    winner: 'Max Verstappen',
-  },
-  {
-    name: 'Circuit de Barcelona-Catalunya',
-    longlat: [41.56830708666628, 2.2571188084700045],
-    winner: 'Max Verstappen',
-  },
-  {
-    name: 'Circuit de Monaco',
-    longlat: [43.73486454785762, 7.421411392106805],
-    winner: 'Sergio Perez',
-  },
+window.addEventListener('DOMContentLoaded', (e) => {
+  d3.selectAll('button').on('click', (e) => updateChart(e.target.value));
+  updateChart(1);
+});
 
-  {
-    name: 'Baku City Circuit',
-    longlat: [40.37282816855186, 49.85295629315864],
-    winner: 'Max Verstappen',
-  },
+const filterItem = document.querySelector('.buttonFilter');
+window.onload = () => {
+  filterItem.onclick = (selectedItem) => {
+    if (selectedItem.target.classList.contains('btn')) {
+      filterItem.querySelector('.active').classList.remove('active');
+      selectedItem.target.classList.add('active');
+    }
+  };
+};
 
-  {
-    name: 'Circuit Gilles Villeneuve',
-    longlat: [45.501528363448784, -73.52803410120104],
-    winner: 'Max Verstappen',
-  },
-  {
-    name: 'Silverstone Circuit',
-    longlat: [52.073295900672065, -1.0148545602668675],
-    winner: 'Carlos Sainz Jr.',
-  },
-  {
-    name: 'Red Bull Ring',
-    longlat: [47.22315229010509, 14.76129439965457],
-    winner: 'Charles Leclerc',
-  },
-
-  {
-    name: 'Circuit Paul Ricard',
-    longlat: [43.25108100419511, 5.793438680986409],
-    winner: 'Max Verstappen',
-  },
-
-  {
-    name: 'Hungaroring',
-    longlat: [47.58132751634226, 19.25095392155147],
-    winner: 'Max Verstappen',
-  },
-  {
-    name: 'Circuit van Spa-Francorchamps',
-    longlat: [50.436576937266786, 5.971899795181605],
-    winner: 'Max Verstappen',
-  },
-  {
-    name: 'Circuit Zandvoort',
-    longlat: [52.38760986011846, 4.544008951045924],
-    winner: 'Max Verstappen',
-  },
-
-  {
-    name: 'Autodromo Nazionale Monza',
-    longlat: [45.61970904196297, 9.287476258857936],
-    winner: 'Max Verstappen',
-  },
-
-  {
-    name: 'Marina Bay Street Circuit',
-    longlat: [1.2944204060642202, 103.86663581786028],
-    winner: 'Sergio Perez',
-  },
-  {
-    name: 'Circuit Suzuka',
-    longlat: [34.84562870078928, 136.53838357031526],
-    winner: 'Max Verstappen',
-  },
-  {
-    name: 'Circuit of the Americas',
-    longlat: [30.134209628415075, -97.63584037264167],
-    winner: 'Max Verstappen',
-  },
-
-  {
-    name: 'Autódromo Hermanos Rodríguez',
-    longlat: [19.405068316076758, -99.09237308256166],
-    winner: 'Max Verstappen',
-  },
-  {
-    name: 'Autódromo José Carlos Pace',
-    longlat: [-23.701332343097416, -46.697707638342],
-    winner: 'George Russel',
-  },
-  {
-    name: 'Yas Marina Circuit',
-    longlat: [24.473429941219667, 54.60418912684601],
-    winner: 'Max Verstappen',
-  },
-];
+//LEAFLET
 
 var map = L.map('map').setView([51.505, -0.09], 3);
 
@@ -285,6 +148,7 @@ L.tileLayer(
   }
 ).addTo(map);
 
+//ICON
 var myIcon = L.icon({
   iconUrl: '../images/flag2.png',
   iconSize: [40, 40],
@@ -292,12 +156,8 @@ var myIcon = L.icon({
   popupAnchor: [15, -33],
 });
 
-// var marker = L.marker([51.5, -0.09]).addTo(map);
-// var markerD = L.marker([20.5, -0.09]).addTo(map);
-// marker.bindPopup('<b>Hello world!</b><br>I am a popup.').openPopup();
-// markerD.bindPopup('<b>Hello world!</b><br>I am a popup.').openPopup();
-
-coords.forEach(({ name, longlat, winner }) => {
+//WINNAAR GP
+co.coords.forEach(({ name, longlat, winner }) => {
   L.marker(longlat, { icon: myIcon })
     .addTo(map)
     .bindPopup(`<h2>${name}</h2> <p>Winner of the GP: <b>${winner}</b></p>`);

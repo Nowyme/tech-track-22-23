@@ -9,34 +9,7 @@ body {
   font-family: sans-serif;
 }
 
-/* main {
-  display: grid;
-  grid-template-columns: 0.5fr 1fr;
-  gap: 1.5rem;
-  grid-template-columns: repeat(3, 1fr);
-  padding-block: 2rem;
-  width: min(95%, 70rem);
-  margin-inline: auto;
-}
-
-main section {
-  background-color: brown;
-}
-
-main section:first-of-type {
-  grid-column-start: 1;
-  grid-row-start: 1;
-  grid-row-end: 3;
-}
-
-main section:nth-of-type(2) {
-  grid-column-start: 2;
-}
-
-main section:last-of-type {
-  grid-column-start: 2;
-} */
-
+/* GRID CONTAINER */
 .container {
   display: grid;
   grid-template-columns: 0fr 1fr 1fr;
@@ -69,28 +42,23 @@ main section:last-of-type {
   grid-area: test;
   position: relative;
   overflow: hidden;
-  /* background-color: rebeccapurple; */
 }
 
 .colum2 {
   grid-area: test2;
   position: relative;
-  /* background-color: blue; */
 }
 
 .colum3 {
   grid-area: test3;
-
-  /* background-color: red; */
 }
 
 svg {
-  padding-top: 3.5em;
   padding-left: 6em;
   border: none;
-
+  padding-top: 2em;
   position: absolute;
-  bottom: 0;
+  top: 5em;
 }
 
 text {
@@ -115,7 +83,7 @@ text {
 .imgDriver {
   margin-top: 1em;
   position: relative;
-  top: 0.5em;
+  top: 3.2em;
 }
 .imgLi {
   margin-left: 1.5em;
@@ -152,8 +120,6 @@ text {
 }
 
 .colum2 > div button {
-  background-color: #4caf50;
-
   border: none;
 
   color: white;
@@ -166,16 +132,18 @@ text {
   cursor: pointer;
   border-radius: 10px;
 }
-
-.colum2 > div button:last-of-type {
+.btn {
   background-color: gray;
+}
+.active {
+  background-color: #4caf50;
 }
 
 .round {
   border-radius: 20px;
 }
 
-/* LEAF LET */
+/* LEAFLET */
 
 #map {
   position: absolute;

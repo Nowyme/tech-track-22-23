@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-  <title>Tech-track Boilerplate App</title>
+  <title>F1 dashboard</title>
 </head>
 
 <body>
@@ -30,16 +30,19 @@
       </div>
 
       <div class="colum2">
-        <div>
-          <button value="winst">Winst</button>
-          <button value="pole">Pole</button>
+
+
+        <div class="buttonFilter">
+          <button class="active btn" value="1">Winst</button>
+          <button class="btn" value="2">Pole position</button>
         </div>
         <ul class="imgDriver"></ul>
-        <svg width="700" height="379">
+        <svg width="750" height="500">
           <g id="bars" transform="translate(90, 0)">
           </g>
-          <g id="labels"></g>
+          <g id="labels" transform="translate(0, 35)"></g>
         </svg>
+
       </div>
       <div class="colum3">
         <ul class="listD"></ul>
@@ -54,7 +57,7 @@
 
 
   <script type="module" src="./scripts/main.js"></script>
-  <!-- Make sure you put this AFTER Leaflet's CSS -->
+
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 </body>

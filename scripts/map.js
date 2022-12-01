@@ -118,3 +118,5 @@ const coords = [
     winner: 'Max Verstappen',
   },
 ];
+
+export { coords };
