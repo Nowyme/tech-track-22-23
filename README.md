@@ -39,8 +39,8 @@ npm run dev
 ```
 
 
-## Documentation ✍
-[ My process and journey can be found in Wiki ](https://github.com/klaudij/tech-track-22-23/wiki)
+## Documentation 
+[ My process and journey can be found in Wiki ](https://github.com/Nowyme/tech-track-22-23/wiki)
 
 
 ## Authors 
