@@ -39,7 +39,7 @@ console.log('Hello, world!');
 //   })
 //   .catch((err) => console.error(err));
 
-fetch('../public/data/f1rankings')
+fetch('../public/data/f1rankings.json')
   .then((response) => response.json())
   .then((data) => {
     const rakingArray = data.response;
