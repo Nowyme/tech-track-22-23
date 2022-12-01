@@ -90,6 +90,13 @@ const dataSet = [
   { driver: 'SAI', winst: 1 },
   { driver: 'RUS', winst: 1 },
 ];
+const dataSet2 = [
+  { driver: 'VER', winst: 15 },
+  { driver: 'LEC', winst: 3 },
+  { driver: 'PER', winst: 2 },
+  { driver: 'SAI', winst: 1 },
+  { driver: 'RUS', winst: 1 },
+];
 
 const chartWidth = 400;
 const chartHeight = 300;

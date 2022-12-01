@@ -209,3 +209,33 @@ text {
   background-position: 0 0;
   background-size: 65px 20px;
 }
+
+/* RANKLIST */
+.listD {
+  padding: 2em;
+  list-style-type: none;
+}
+
+.listD li {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.listD li img {
+  max-width: 5em;
+  flex: 1.2;
+}
+
+.listD li h3 {
+  flex-basis: 30%;
+}
+
+.listD li p {
+  padding: 0.5em 1.5em;
+  background-color: rgb(122, 41, 41);
+  border-radius: 0.5em;
+  color: white;
+  font-size: 1.5em;
+}
