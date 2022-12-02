@@ -104,13 +104,16 @@ function drawChart(dataSet) {
     .attr('y', (d) => yScale(d.driver))
     .attr('rx', 5);
 
-  // const bars = d3.select('#bars').selectAll('g').data(dataSet).join('g');
-
-  // bars
-  //   .append('text')
-  //   .attr('y', (d) => yScale(d.driver) + yScale.bandwidth() / 2)
-  //   .attr('x', (d) => xScale(d.winst) + 20)
-  //   .text((d) => d.winst);
+  const bars = d3
+    .select('#bars')
+    .selectAll('text')
+    .data(dataSet)
+    .join('text')
+    .transition()
+    .duration(500)
+    .attr('y', (d) => yScale(d.driver) + yScale.bandwidth() / 2)
+    .attr('x', (d) => xScale(d.winst) + 20)
+    .text((d) => d.winst);
 
   d3.select('#labels')
     .selectAll('text')
